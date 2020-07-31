@@ -1,7 +1,7 @@
 var db=require('../dbconnec');
 var everyday={
-    getAllEveryday:function(callback){
-        return db.query('select * from everyday',callback);
+    getAllEveryday:function(id,secretaryPhoneNumber,callback){
+        return db.query('select * from everyday where categoryId=? and secretaryPhoneNumber=?',[id,secretaryPhoneNumber],callback);
     },
     addEveryday:function(item,callback){
         return db.query("insert into everyday(everydayPhoneNumber,name,categoryId,secretaryPhoneNumber) values(?,?,?,?)",[item.everydayPhoneNumber,item.name,item.categoryId,item.secretaryPhoneNumber],callback);

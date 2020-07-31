@@ -25,6 +25,7 @@ var userblock={
         return db.query("SELECT * FROM `userblock` WHERE flatName=? and userPhoneNumber=?and secretaryPhoneNumber=?",[flatName,userPhoneNumber,secretaryPhoneNumber],callback);
     },
     
+    
 
 };
 module.exports=userblock;
