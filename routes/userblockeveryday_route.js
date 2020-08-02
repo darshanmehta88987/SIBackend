@@ -14,6 +14,33 @@ router.get("/:blockNumber/:flatName/:secretaryPhoneNumber", function(req, res, n
 });
 
 
+router.post('/',function(req,res,next)
+{
+    userblockevery_model.insertuserblockeveryday(req.body,function(err,rows)
+    {
+        if(err)
+        {
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    });
+}
+);
+
+
+router.delete("/:blockNumber/:flatName/:secretaryPhoneNumber/:everydayPhoneNumber", function(req, res, next) {
+  userblockevery_model.deleteuserblockeveryday(req.params.blockNumber,req.params.flatName,req.params.secretaryPhoneNumber,req.params.everydayPhoneNumber, function(err, rows) {
+  if (err) {
+    res.json(err);
+  } else {
+    res.json(rows);
+  }
+});
+}
+);
+
 
 
 module.exports = router;
