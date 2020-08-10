@@ -24,6 +24,17 @@ let userblockeveryday=require('./routes/userblockeveryday_route');
 let userToken=require('./routes/usertoken_route');
 let usersociety=require('./routes/usersocietylogin_route');
 
+let societywatchman=require('./routes/societywatchman_route');
+
+
+
+
+
+
+
+
+
+
 var app = express();
 
 // view engine setup
@@ -35,6 +46,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -55,6 +71,20 @@ app.use('/getCategory',cayegory);
 app.use('/getuserblockeveryday',userblockeveryday);
 app.use('/userToken',userToken);
 app.use('/usersocietylogin',usersociety);
+
+app.use('/societyWatchman',societywatchman);
+
+
+
+
+
+
+
+
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
