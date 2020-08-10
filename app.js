@@ -21,7 +21,8 @@ let userblockroutes2 = require('./routes/userblock_routes2');
 let notice=require('./routes/notice_route');
 let cayegory=require('./routes/category_route');
 let userblockeveryday=require('./routes/userblockeveryday_route');
-
+let userToken=require('./routes/usertoken_route');
+let usersociety=require('./routes/usersocietylogin_route');
 
 var app = express();
 
@@ -52,6 +53,8 @@ app.use('/userblock2',userblockroutes2);
 app.use('/getNotice',notice);
 app.use('/getCategory',cayegory);
 app.use('/getuserblockeveryday',userblockeveryday);
+app.use('/userToken',userToken);
+app.use('/usersocietylogin',usersociety);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -68,5 +71,13 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+var admin = require("firebase-admin");
 
+            var serviceAccount = require("D:/Studies/DAIICT/SI/SI/SIBackend/private.json");
+            
+            admin.initializeApp({
+            credential: admin.credential.cert(serviceAccount),
+            databaseURL: "https://summerinternship-2cd36.firebaseio.com"
+            });
+            
 module.exports = app;
