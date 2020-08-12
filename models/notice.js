@@ -3,7 +3,7 @@ const { response } = require('../app');
 var notice={
     getNotice:function(secretaryPhoneNumber,callback)
     {
-        return db.query("select id,secretaryPhoneNumber,message,DATE_FORMAT(date, '%d %M %Y')as date  from notice where secretaryPhoneNumber=? ORDER BY(date) DESC ",[secretaryPhoneNumber],callback);
+      return db.query("select id,secretaryPhoneNumber,message,DATE_FORMAT(date, '%d %M %Y')as date  from notice where secretaryPhoneNumber=? ORDER BY(DATE_FORMAT(date, '%Y')) DESC,(DATE_FORMAT(date, '%m')) DESC,(DATE_FORMAT(date, '%d')) DESC ",[secretaryPhoneNumber],callback);
     },
     insertNotice:function(item,callback)
     {
