@@ -13,7 +13,7 @@ var societywatchman={
     insertSocietyWatchman:function(item,callback)
     {
         console.log(item);
-        return db.query("INSERT INTO societyWatchman(userPhoneNumber,secretaryPhoneNumber,) VALUES (?,?)",[item.userPhoneNumber,item.secretaryPhoneNumber],callback);
+        return db.query("INSERT INTO societyWatchman(userPhoneNumber,secretaryPhoneNumber) VALUES (?,?)",[item.userPhoneNumber,item.secretaryPhoneNumber],callback);
     }
 };
     module.exports=societywatchman;
