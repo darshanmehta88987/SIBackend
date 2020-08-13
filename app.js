@@ -103,7 +103,7 @@ app.use(function(err, req, res, next) {
 });
 var admin = require("firebase-admin");
 
-            var serviceAccount = require("D:/Studies/DAIICT/SI/SI/SIBackend/private.json");
+            var serviceAccount = require("./private.json");
             
             admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
