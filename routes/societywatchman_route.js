@@ -1,36 +1,26 @@
-var societywatchman=require('../models/societywatchman_model');
-var express=require('express');
-var router=express.Router();
+var societywatchman = require('../models/societywatchman_model');
+var express = require('express');
+var router = express.Router();
 
-router.get('/:secretaryPhoneNumber?',function(req,res,next)
-{
+router.get('/:secretaryPhoneNumber?', function(req, res, next) {
     console.log(req.params.secretaryPhoneNumber);
-    societywatchman.getSocietyWatchman(req.params.secretaryPhoneNumber,function(err,rows)
-    {
-        if(err)
-        {
+    societywatchman.getSocietyWatchman(req.params.secretaryPhoneNumber, function(err, rows) {
+        if (err) {
             res.json(err);
-        }
-        else{
+        } else {
             res.json(rows);
         }
     });
-}
-);
+});
 
-router.post('/',function(req,res,next)
-{
+router.post('/', function(req, res, next) {
     console.log(req.body);
-    societywatchman.insertSocietyWatchman(req.body,function(err,rows)
-    {
-        if(err)
-        {
+    societywatchman.insertSocietyWatchman(req.body, function(err, rows) {
+        if (err) {
             res.json(err);
-        }
-        else{
+        } else {
             res.json(rows);
         }
     });
-}
-);
-module.exports=router;  
+});
+module.exports = router;
