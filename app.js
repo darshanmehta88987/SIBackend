@@ -10,9 +10,9 @@ var usersRouter = require('./routes/users');
 let userType = require('./routes/usertype_routes');
 let userss = require('./routes/users_routes');
 let society = require('./routes/society_routes');
+let blocks = require('./routes/blocks_routes');
 let flat = require('./routes/flat_routes');
-let block = require('./routes/block_routes');
-let userblock = require('./routes/userblock_routes');
+let userflat = require('./routes/userflat_routes');
 let everydaycategory = require('./routes/everydaycategory_routes');
 let everyday = require('./routes/everyday_routes');
 let usertypename = require('./routes/usertype_name_routes');
@@ -58,9 +58,9 @@ app.use('/users', usersRouter);
 app.use('/usertype', userType);
 app.use('/userss', userss);
 app.use('/society', society);
+app.use('/blocks', blocks);
 app.use('/flat', flat);
-app.use('/block', block);
-app.use('/userblock', userblock);
+app.use('/userflat', userflat);
 app.use('/everydaycategory', everydaycategory);
 app.use('/everyday', everyday);
 app.use('/usertypename', usertypename);
@@ -103,6 +103,7 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 var admin = require("firebase-admin");
+
 
 var serviceAccount = require("./private.json");
 

@@ -2,11 +2,9 @@ var flat_model = require("../models/flat_model");
 var express = require("express");
 var router = express.Router();
 
-
-
-router.get("/:flatName?/:secretaryPhoneNumber?", function(req, res, next) {
-  if (req.params.flatName) {
-    flat_model.getFlatById(req.params.flatName,req.params.secretaryPhoneNumber,function(err, rows) {
+router.get("/:id?/:secretaryPhoneNumber?", function(req, res, next) {
+  if (req.params.id) {
+    flat_model.getflatById(req.params.id,req.params.secretaryPhoneNumber,function(err, rows) {
       if (err) {
         res.json(err);
       } else {
@@ -14,7 +12,7 @@ router.get("/:flatName?/:secretaryPhoneNumber?", function(req, res, next) {
       }
     });
   } else {
-    flat_model.getAllFlat(function(err, rows) {
+    flat_model.getAllflat(function(err, rows) {
       if (err) {
         res.json(err);
       } else {
@@ -23,8 +21,8 @@ router.get("/:flatName?/:secretaryPhoneNumber?", function(req, res, next) {
     });
   }
 });
-router.delete("/:flatName/:secretaryPhoneNumber", function(req, res, next) {
-    flat_model.deleteFlat(req.params.flatName,req.params.secretaryPhoneNumber,function(err, rows) {
+router.delete("/:flatNumber/:id/:secretaryPhoneNumber", function(req, res, next) {
+    flat_model.deleteflat(req.params.flatNumber,req.params.id,req.params.secretaryPhoneNumber,function(err, rows) {
     if (err) {
       res.json(err);
     } else {
@@ -33,8 +31,8 @@ router.delete("/:flatName/:secretaryPhoneNumber", function(req, res, next) {
   });
 });
 
-router.put("/:flatName/:secretaryPhoneNumber", function(req, res, next) {
-    flat_model.updateFlatById(req.params.flatName,req.params.secretaryPhoneNumber,req.body, function(err, rows) {
+router.put("/:flatNumber/:id/:secretaryPhoneNumber", function(req, res, next) {
+    flat_model.updateflatById(req.params.flatNumber,req.params.id,req.params.secretaryPhoneNumber,req.body, function(err, rows) {
     if (err) {
       res.json(err);
     } else {
@@ -43,7 +41,7 @@ router.put("/:flatName/:secretaryPhoneNumber", function(req, res, next) {
   });
 });
 router.post("/", function(req, res, next) {
-    flat_model.addFlat(req.body, function(err, rows) {
+    flat_model.addflat(req.body, function(err, rows) {
     if (err) {
       res.json(err);
     } else {

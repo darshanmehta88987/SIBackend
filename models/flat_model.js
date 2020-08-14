@@ -1,24 +1,21 @@
 var db=require('../dbconnec');
 var flat={
-    getAllFlat:function(callback){
+    getAllflat:function(callback){
         return db.query('select * from flat',callback);
     },
-    addFlat:function(item,callback){
-        return db.query("insert into flat(flatName,secretaryPhoneNumber,numberOfFloor) values(?,?,?)",[item.flatName,item.secretaryPhoneNumber,item.numberOfFloor],callback);
+    addflat:function(item,callback){
+        return db.query("insert into flat(flatNumber,blockName,secretaryPhoneNumber) values(?,?,?)",[item.flatNumber,item.blockName,item.secretaryPhoneNumber],callback);
     },
-    deleteFlat:function(flatName,secretaryPhoneNumber,callback){
-        return db.query("delete from flat where flatName=? and secretaryPhoneNumber=?",[flatName,secretaryPhoneNumber],callback);
+    deleteflat:function(flatNumber,id,secretaryPhoneNumber,callback){
+        return db.query("delete from flat where blockName=? and secretaryPhoneNumber=? and flatNumber=?",[id,secretaryPhoneNumber,flatNumber],callback);
     },
-    getFlatById:function(flatName,secretaryPhoneNumber,callback){
-        return db.query("select * from flat where flatName=? and secretaryPhoneNumber=?",[flatName,secretaryPhoneNumber],callback);
+    getflatById:function(id,secretaryPhoneNumber,callback){
+        return db.query("select * from flat where blockName=? and secretaryPhoneNumber=?",[id,secretaryPhoneNumber],callback);
     },
-    updateFlatById:function(flatName,secretaryPhoneNumber,item,callback){
-        return db.query("update flat set numberOfFloor=?,flatName=? where secretaryPhoneNumber=? and flatName=?",[item.numberOfFloor,item.flatName,secretaryPhoneNumber,flatName],callback);
-    },
-    getFlatBySecretaryPhoneNumber:function(secretaryPhoneNumber,callback){
-        return db.query('select * from flat where secretaryPhoneNumber=?',[secretaryPhoneNumber],callback);
+    updateflatById:function(flatNumber,id,secretaryPhoneNumber,item,callback){
+        return db.query("update flat set flatNumber=? where secretaryPhoneNumber=? and blockName=? and flatNumber=?",[item.flatNumber,secretaryPhoneNumber,id,flatNumber],callback);
     }
 
 };
 module.exports=flat;
-//flatName,secretaryPhoneNumber,numberOfFloor
+//flatNumber,blockName,secretaryPhoneNumber
