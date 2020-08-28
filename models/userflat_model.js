@@ -24,9 +24,16 @@ var userflat={
     getUserflatNumbers:function(blockName,userPhoneNumber,secretaryPhoneNumber,callback){
         return db.query("SELECT * FROM `userflat` WHERE blockName=? and userPhoneNumber=?and secretaryPhoneNumber=?",[blockName,userPhoneNumber,secretaryPhoneNumber],callback);
     },
+    usersView:function(blockName,secretaryPhoneNumber,callback)
+    {
+        return db.query("select u.*,uu.* from userflat u join users uu on uu.userPhoneNumber=u.userPhoneNumber where secretaryPhoneNumber = ? and blockName = ? order by flatNumber",[secretaryPhoneNumber,blockName],callback);
+    }
     
     
 
 };
 module.exports=userflat;
 //userPhoneNumber,flatNumber,blockName,secretaryPhoneNumber
+
+//SELECT u.userName,u.userPhoneNumber,uf.blockName,uf.flatNumber,secretaryPhoneNumber FROM userflat uf join users u on u.userPhoneNumber=uf.userPhoneNumber where  NOT //uf.userPhoneNumber=8485996496  AND secretaryPhoneNumber=9408548950 ORDER BY blockName ASC,flatNumber ASC ;
+//list of all other user from society 
