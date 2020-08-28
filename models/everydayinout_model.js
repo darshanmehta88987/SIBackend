@@ -15,6 +15,9 @@ var everydayinout = {
     },
     getAllInOutEntriesforUser: function(userPhoneNumber, callback) {
         return db.query('select uf.flatNumber,uf.blockName,e.everydayPhoneNumber,e.name,e.image,ec.categoryName,ee.inTime,ee.outTime from everydayinout ee,userblockeveryday ub,userflat uf,everyday e,everydaycategory ec where e.everydayPhoneNumber=ee.phoneNumber and e.everydayPhoneNumber=ub.everydayPhoneNumber and ec.categoryId=e.categoryId and uf.secretaryPhoneNumber=ub.secretaryPhoneNumber and uf.userPhoneNumber=?', [userPhoneNumber], callback);
+    },
+    getAllInOutEntriesforUserS: function(secretaryPhoneNumber,userPhoneNumber,blockName,flatNumber, callback) {
+        return db.query('select uf.flatNumber,uf.blockName,e.everydayPhoneNumber,e.name,e.image,ec.categoryName,DATE_FORMAT(ee.inTime,"%T %M %s") as inTime,DATE_FORMAT(ee.outTime,"%T %M %s") as outTime from everydayinout ee,userblockeveryday ub,userflat uf,everyday e,everydaycategory ec where e.everydayPhoneNumber=ee.phoneNumber and e.everydayPhoneNumber=ub.everydayPhoneNumber and ec.categoryId=e.categoryId and uf.secretaryPhoneNumber=ub.secretaryPhoneNumber and uf.userPhoneNumber=? and uf.secretaryPhoneNumber=? and uf.blockName=? and uf.flatNumber=?', [userPhoneNumber,secretaryPhoneNumber,blockName,flatNumber], callback);
     }
 
 
