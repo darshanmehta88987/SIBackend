@@ -29,7 +29,7 @@ const everydaylist_routes = require('./routes/everydaylist_routes');
 const everydayinout = require('./routes/everydayinout_routes');
 const everydayinout_inentries = require('./routes/everydayinout_inentries_routes');
 const everydayinout_lastactivity = require("./routes/everydayinout_lastactivity_routes");
-
+let noticeLast = require('./routes/notice_last_routes');
 
 
 
@@ -82,7 +82,7 @@ app.use('/everydaylist', everydaylist_routes);
 app.use('/everydayinout', everydayinout);
 app.use('/everydayinentries', everydayinout_inentries);
 app.use('/everydayinoutlastactivity', everydayinout_lastactivity);
-
+app.use('/noticeLast',noticeLast);
 
 
 
