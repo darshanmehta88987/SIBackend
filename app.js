@@ -28,9 +28,10 @@ const societyWatchman_login = require('./routes/societywatchman_login_routes');
 const everydaylist_routes = require('./routes/everydaylist_routes');
 const everydayinout = require('./routes/everydayinout_routes');
 const everydayinout_inentries = require('./routes/everydayinout_inentries_routes');
+const everydayinout_outentries = require('./routes/everydayinout_outentries_routes');
 const everydayinout_lastactivity = require("./routes/everydayinout_lastactivity_routes");
 let noticeLast = require('./routes/notice_last_routes');
-
+let loginPost = require('./routes/user_secretary_login_routes');
 
 
 
@@ -81,8 +82,10 @@ app.use('/societywatchmanlogin', societyWatchman_login);
 app.use('/everydaylist', everydaylist_routes);
 app.use('/everydayinout', everydayinout);
 app.use('/everydayinentries', everydayinout_inentries);
+app.use('/everydayoutentries', everydayinout_outentries);
 app.use('/everydayinoutlastactivity', everydayinout_lastactivity);
-app.use('/noticeLast',noticeLast);
+app.use('/noticeLast', noticeLast);
+app.use('/loginPost', loginPost);
 
 
 
