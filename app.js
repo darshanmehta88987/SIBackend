@@ -31,6 +31,7 @@ const everydayinout_inentries = require('./routes/everydayinout_inentries_routes
 const everydayinout_lastactivity = require("./routes/everydayinout_lastactivity_routes");
 let noticeLast = require('./routes/notice_last_routes');
 let loginPost = require('./routes/user_secretary_login_routes');
+let updatepassword=require('./routes/update_password');
 
 
 
@@ -84,6 +85,7 @@ app.use('/everydayinentries', everydayinout_inentries);
 app.use('/everydayinoutlastactivity', everydayinout_lastactivity);
 app.use('/noticeLast',noticeLast);
 app.use('/loginPost',loginPost);
+app.use('/updatepassword',updatepassword);
 
 
 
