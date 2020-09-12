@@ -14,6 +14,7 @@ function decrypt(text) {
     dec += decipher.final('utf8');
     return dec;
 }
+
 var users = {
     getAllUsers: function(callback) {
         return db.query('select u.userPhoneNumber,u.userName,u.password,ut.name from users u join usertype ut on u.userTypeId=ut.userTypeId', callback);
