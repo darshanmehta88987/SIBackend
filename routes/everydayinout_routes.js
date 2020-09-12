@@ -99,60 +99,64 @@ router.put('/:phoneNumber?', function (req, res, next) {
         } else {
 
             var name;
-            everydayinout.geteverydayname(req.params.phoneNumber,function(err,res)
-            {
-                console.log(req.params.phoneNumber + " hello");
-                if(err)
-                {
-                     console.log(err);
-                } 
-                else
-                {
-                    console.log(res);
-                    name=res[0].name;
-                }
-            });
 
-            // Notifiaction code starts
-
-            var admin = require("firebase-admin");
-            var token1 = [];
-            userToken.getUserToken(req.body.secretaryPhoneNumber, function (err, res) {
-                if (err) {
+           // Notifiaction code starts
+           everydayinout.geteverydayname(req.params.phoneNumber,function(err,res)
+           {
+               console.log(req.params.phoneNumber + " hello");
+               if(err)
+               {
                     console.log(err);
-                }
-                if (res) {
-                    //console.log(res);
-                    res.map((x) => {
-                        if (x.userToken != '')
-                            token1.push(x.userToken)
+               } 
+               else
+               {
+                   console.log(res);
+                   console.log(res[0].name + " hello");
+                   name=res[0].name;
+               }
+           });
 
-                    });
-                    //token = res;
-                    var payload = {
-                        notification: {
-                            title: req.body.title,
-                            body: req.body.message
-                        }
-                    };
+           
 
-                    var option = {
-                        priority: "high",
-                        timeToLive: 60 * 60 * 24
-                    };
 
-                    admin.messaging().sendToDevice(token1, payload, option)
-                        .then(function (response) {
-                            console.log("Received", response);
-                        })
-                        .catch(function (error) {
-                            console.log("error", error);
-                        });
-                    console.log(token1 + " HELLO");
-                }
-            });
-            console.log(token1 + " world");
-            // notification code ends
+           var admin = require("firebase-admin");
+           var token1 = [];
+           everydayinout.giveNotification(req.params.phoneNumber, function (err, res) {
+               if (err) {
+                   console.log(err);
+               }
+               if (res) {
+                   //console.log(res);
+                   res.map((x) => {
+                       if (x.userToken != '')
+                           token1.push(x.userToken)
+
+                   });
+                   //token = res;
+                   var payload = {
+                       notification: {
+                           title:name,
+                           body: "Has checked out"
+                       }
+                   };
+
+                   var option = {
+                       priority: "high",
+                       timeToLive: 60 * 60 * 24
+                   };
+
+                   admin.messaging().sendToDevice(token1, payload, option)
+                       .then(function (response) {
+                           console.log("Received", response);
+                       })
+                       .catch(function (error) {
+                           console.log("error", error);
+                       });
+                   console.log(token1 + " HELLO");
+               }
+           });
+           console.log(token1 + " world");
+           // notification code ends
 
 
 
