@@ -45,7 +45,7 @@ router.post('/', function (req, res, next) {
 
             var admin = require("firebase-admin");
             var token1 = [];
-            userToken.getUserToken(req.body.secretaryPhoneNumber, function (err, res) {
+            everydayinout.giveNotification(req.body.phoneNumber, function (err, res) {
                 if (err) {
                     console.log(err);
                 }

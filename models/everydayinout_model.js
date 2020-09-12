@@ -27,7 +27,14 @@ var everydayinout = {
     },
     geteverydayname:function(phoneNumber,callback){
         return db.query('select name from everyday where everydayPhoneNumber=?',[phoneNumber],callback);
+    },
+    giveNotification: function(everydayPhoneNumber, callback) {
+        console.log(everydayPhoneNumber);
+        return db.query('select u.userToken from userflat uf,users u,everydayinout e,everyday ev,userblockeveryday ub where ub.secretaryPhoneNumber=e.secretaryPhoneNumber and uf.userPhoneNumber=u.userPhoneNumber and uf.secretaryPhoneNumber=e.secretaryPhoneNumber and ev.everydayPhoneNumber=e.phoneNumber and e.phoneNumber=? group by u.userPhoneNumber', [everydayPhoneNumber], callback);
+        // return db.query('select e.*,ev.*,ub.*,uf.*,u.* from userflat uf,users u,everydayinout e,everyday ev,userblockeveryday ub where ub.secretaryPhoneNumber=e.secretaryPhoneNumber and uf.userPhoneNumber=u.userPhoneNumber and uf.secretaryPhoneNumber=e.secretaryPhoneNumber and ev.everydayPhoneNumber=e.phoneNumber and e.phoneNumber=? group by u.userPhoneNumber', [everydayPhoneNumber], callback);
     }
+
+
 
 };
 module.exports = everydayinout;
