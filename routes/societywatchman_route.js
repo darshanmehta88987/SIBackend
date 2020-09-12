@@ -23,4 +23,15 @@ router.post('/', function(req, res, next) {
         }
     });
 });
+
+router.delete('/:userPhonenumber', function(req, res, next) {
+    console.log(req.body);
+    societywatchman.delete_watchman(req.params.userPhonenumber, function(err, rows) {
+        if (err) {
+            res.json(err);
+        } else {
+            res.json(rows);
+        }
+    });
+});
 module.exports = router;

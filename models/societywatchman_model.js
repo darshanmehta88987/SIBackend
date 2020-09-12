@@ -30,6 +30,10 @@ var societywatchman = {
         console.log(encpassword);
         return db.query("select u.userName,sw.secretaryPhoneNumber,s.societyName from users u,societywatchman sw,society s where u.userTypeId=? and u.userPhoneNumber=? and u.password=? and u.userPhoneNumber=sw.userPhoneNumber and sw.secretaryPhoneNumber=s.secretaryPhoneNumber", [item.userTypeId, item.userPhoneNumber, encpassword], callback);
         // return db.query("select * from users u where u.userPhoneNumber=? and u.password=? and u.userTypeId=? ", [item.userPhoneNumber, item.password, item.userTypeId], callback);
+    },
+
+    delete_watchman: function(userPhoneNumber,callback){
+        return db.query("DELETE FROM societywatchman WHERE userPhoneNumber=?",userPhoneNumber,callback);
     }
 
 
