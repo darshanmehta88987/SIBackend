@@ -24,7 +24,13 @@ var everydayinout = {
     },
     getAllInOutEntriesforUserS: function(secretaryPhoneNumber, userPhoneNumber, blockName, flatNumber, callback) {
         return db.query('select uf.flatNumber,uf.blockName,e.everydayPhoneNumber,e.name,e.image,ec.categoryName,DATE_FORMAT(ee.inTime,"%d %m %Y %T") as inTime,DATE_FORMAT(ee.outTime,"%d %m %Y %T") as outTime from everydayinout ee,userblockeveryday ub,userflat uf,everyday e,everydaycategory ec where e.everydayPhoneNumber=ee.phoneNumber and e.everydayPhoneNumber=ub.everydayPhoneNumber and ec.categoryId=e.categoryId and uf.secretaryPhoneNumber=ub.secretaryPhoneNumber and uf.userPhoneNumber=? and uf.secretaryPhoneNumber=? and uf.blockName=? and uf.flatNumber=? group by inTime', [userPhoneNumber, secretaryPhoneNumber, blockName, flatNumber], callback);
+    },
+    giveNotification: function(everydayPhoneNumber, callback) {
+        console.log(everydayPhoneNumber);
+        return db.query('select u.userToken from userflat uf,users u,everydayinout e,everyday ev,userblockeveryday ub where ub.secretaryPhoneNumber=e.secretaryPhoneNumber and uf.userPhoneNumber=u.userPhoneNumber and uf.secretaryPhoneNumber=e.secretaryPhoneNumber and ev.everydayPhoneNumber=e.phoneNumber and e.phoneNumber=? group by u.userPhoneNumber', [everydayPhoneNumber], callback);
+        // return db.query('select e.*,ev.*,ub.*,uf.*,u.* from userflat uf,users u,everydayinout e,everyday ev,userblockeveryday ub where ub.secretaryPhoneNumber=e.secretaryPhoneNumber and uf.userPhoneNumber=u.userPhoneNumber and uf.secretaryPhoneNumber=e.secretaryPhoneNumber and ev.everydayPhoneNumber=e.phoneNumber and e.phoneNumber=? group by u.userPhoneNumber', [everydayPhoneNumber], callback);
     }
+
 
 
 };
